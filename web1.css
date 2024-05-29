@@ -1,0 +1,222 @@
+@charset "UTF-8";
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family:"Pappins",sans-serif;
+}
+ 
+
+.logo{
+position: fixed;
+	top: 10px;
+	left:2px;
+
+}
+
+
+header{
+	position: fixed;
+	top: 5px;
+	left: 700px;
+	width: 100%;
+	padding: 20px 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 99;
+}
+
+.navigation a{
+	position: relative;
+	font-size: 1.1em;
+	color: #fff;
+	text-decoration: none;
+	font-weight: 500;
+	margin-left: 40px;
+}
+
+.navigation a::after{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 3px;
+	background: #fff;
+	border-radius: 5px;
+	transform-origin: right;
+	left: 0;
+	bottom: -6px;
+	transform: scaleX(0);
+	transition: transform .5s;
+	
+}	
+
+.navigation a:hover::after{
+	transform-origin: left;
+	transform: scaleX(1);
+}
+   	
+.navigation .btnlogin-popup{
+		width: 130px;
+		height: 50px;
+		background: transparent;
+		border: 2px solid #fff;
+		outline:none ;
+		border-radius: 6px;
+		cursor: pointer;
+		font-size: 1.1em;
+		color: #fff;
+		font-weight: 500;
+		margin-left: 40px;	
+		transition: .5s;
+			
+}
+
+
+.wrapper .form-box{
+	width: 100%;
+	padding: 40px;
+	
+}
+
+
+.form-box h2{
+	font-size: 2em;
+	color: silver;
+	text-align: center;
+}
+.input-box{
+	position: relative;
+	width: 100%;
+	height: 45px;
+	border-bottom: 2px solid silver;
+	margin: 30px 0;
+	
+}
+
+.input-box label{
+	position: absolute;
+	top: 50%;
+	left: 5px ;
+	transform: translateY(-50%);
+	font-size: 1em;
+	color: silver;
+	font-weight: 500;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.input-gender label{
+	
+	font-size: 1em;
+	color: silver;
+	font-weight: 500;
+	left: 5px ;
+	position: relative;
+	width: 100%;
+	height: 50px;
+	border-bottom: 2px solid silver;
+	margin: 30px 0;
+	
+}
+
+.input-box input:focus~label,
+.input-box input:valid~label{
+	top: -5px;
+}
+
+.input-box input{
+	width: 100%;
+	height: 25px;
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	color: silver;
+	font-weight: 600;
+	padding: 0 15px 0 5px;
+}
+
+.input-gender {
+	background: transparent;
+	border: none;
+	outline: none;
+	font-size: 1em;
+	color: silver;
+	font-weight: 600;
+}
+
+.input-box .icon{
+	position: absolute;
+	right: 8px;
+	font-size: 1.2em;
+	color: silver;
+	line-height: 57px;
+}
+
+
+.remember-forgot{
+	font-size: .9em;
+	color: silver;
+	font-weight: 500;
+	margin: -15px 0 15px;
+	display: flex;
+	justify-content: space-between;
+	
+}
+
+.remember-forgot label input{
+	accent-color: silver;
+	margin-right: 3px;
+	
+}
+
+remember-forgot a{
+	color: silver;
+	text-decoration: none;
+	
+}
+
+.remember-forgot a:hover{
+	text-decoration: underline;
+	
+}
+
+.btn {
+	width: 100%;
+	height: 45px;
+	background: color-mix(in srgb, #010356  50%	, #F90080 50%);
+	border: none;
+	outline: none;
+	border-radius: 6px;
+	cursor: pointer;
+	font-size: 1em;
+	color: silver;
+	font-weight: 500;
+
+}
+
+.login-register{
+	font-size: .9em;
+	color: silver;
+	text-align: center;
+	font-weight: 500;
+	margin: 25px 0 10px;
+	
+}
+
+.login-register p a{
+	color: silver;
+	text-decoration: none;
+	font-weight: 600;
+	
+}
+
+.login-register p a:hover{
+	text-decoration: underline;
+		
+}
+
+
+
