@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+
+
+
 <beans xmlns="http://www.springframework.org/schema/beans"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
     xmlns:context="http://www.springframework.org/schema/context"
@@ -10,37 +14,66 @@
         http://www.springframework.org/schema/context/spring-context.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-        
-          <!-- Provide support for component scanning -->
-    <context:component-scan base-package="com.springmvc" />
+
+  <!-- Provide support for component scanning -->
+    <context:component-scan base-package="com.mvc" />
+    <context:component-scan base-package="com.crud" />
+    <context:component-scan base-package="com.FormWithAttach" />
+     <context:component-scan base-package="com.table" />
+     <context:component-scan base-package="com.Jason" />
+    
 
     <!--Provide support for conversion, formatting and validation -->
     <mvc:annotation-driven/>
- 
- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-     <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-     <property name="url" value="jdbc:mysql://localhost:3306/testdemo"></property>
-     <property name="username" value="root"></property>
-     <property name="password" value=""></property>
-    </bean>
- 
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-     <property name="dataSource" ref="dataSource"></property>
-    </bean>
+    <mvc:resources mapping = "/image/**" location = "/image/" />
+    <mvc:resources mapping = "/css/**" location = "/css/" />
+    <mvc:resources mapping = "/upload/**" location = "/upload/" />
 
- <bean id="studao" class="com.springmvc.StudentDao">
-  <property name="jdbcTemplate" ref="jdbcTemplate"></property>
- </bean>
- 
-    <bean id="viewResolver"
+   <bean id="viewResolver"
         class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
-            <value>/WEB-INF/view/</value>
+            <value>/WEB-INF/JsonFile/</value>
         </property>
 
         <property name="suffix">
             <value>.jsp</value>
         </property>
     </bean>
-        
-        </beans>
+    
+     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="20848820" />
+     </bean>  
+    <!-- Connecting Mysql -->
+    
+    <bean id = "ds" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+		    <property name = "driverClassName" value = "com.mysql.jdbc.Driver" />
+		    <property name = "url" value = "jdbc:mysql://localhost:3306/db_springjdbc" />
+		    <property name = "username" value = "root" />
+		    <property name = "password" value = "" />
+    </bean>
+
+    <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
+    	<property name = "dataSource" ref = "ds" />
+    </bean>
+    
+    
+     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">  
+  <property name="host" value="smtp.gmail.com" />  
+    <property name="username" value="prateekgehsaan@gmail.com" />  
+    <property name="password" value="xljz ebie xbzi lvsx" />  
+    <property name="javaMailProperties">  
+       <props>  
+              <prop key="mail.smtp.auth">true</prop>  
+              <prop key="mail.smtp.socketFactory.port">465</prop>  
+              <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>  
+              <prop key="mail.smtp.port">465</prop>  
+        </props>  
+    </property>  
+</bean> 
+    
+    
+    <bean id = "dao" class = "com.crud.MainDao">
+    <property name = "jdbctemplate" ref = "jdbcTemplate" />
+    <property name = "mailsender" ref = "mailSender" />
+    </bean>
+</beans>
