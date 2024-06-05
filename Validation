@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 1em;
+            border: 1px solid #ccc;
+            border-radius: 1em;
+        }
+        .form-field {
+            margin-bottom: 1em;
+        }
+        .form-field label {
+            display: block;
+            margin-bottom: 0.5em;
+        }
+        .form-field input {
+            width: 100%;
+            padding: 0.5em;
+            box-sizing: border-box;
+        }
+        .submit-button {
+            padding: 0.5em 1em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 0.25em;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        .submit-button.enabled {
+            cursor: pointer;
+            opacity: 1;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            function validateForm() {
+                const name = $('#name').val().trim();
+                const email = $('#email').val().trim();
+                const age = $('#age').val().trim();
+                
+                if (name && email && age) {
+                    $('#submit-button').prop('disabled', false).addClass('enabled');
+                } else {
+                    $('#submit-button').prop('disabled', true).removeClass('enabled');
+                }
+            }
+            
+            $('#name, #email, #age').on('input', validateForm);
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Form Validation</h2>
+        <form id="myForm">
+            <div class="form-field">
+                <label for="name">Name (required):</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-field">
+                <label for="email">Email (required):</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-field">
+                <label for="age">Age (required):</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+            <button type="submit" id="submit-button" class="submit-button" disabled>Submit</button>
+        </form>
+    </div>
+</body>
+</html>
