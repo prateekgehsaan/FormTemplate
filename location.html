@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Use My Location</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #2874f0;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="useMyLocation()">Use My Location</button>
+
+  <input type="text" style = "width : 400px;" id="locationInput" placeholder="Location Information"  readonly>
+
+  <script>
+    function useMyLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition, showError);
+      } else {
+        alert("Geolocation is not supported by this browser.");
+      }
+    }
+
+    function showPosition(position) {
+      // Get location details using reverse geocoding
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+      const geocodingUrl = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`;
+
+      fetch(geocodingUrl)
+        .then(response => response.json())
+        .then(data => {
+          const city = data.address.city || data.address.village || data.address.town;
+          const state = data.address.state;
+          const country = data.address.country;
+
+          // Display location information in the input box
+          const locationInput = document.getElementById('locationInput');
+          locationInput.value = `${city}, ${state}, ${country}`;
+        })
+        .catch(error => {
+          console.error('Error fetching location information:', error);
+        });
+    }
+
+    function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+          alert("User denied the request for Geolocation.");
+          break;
+        case error.POSITION_UNAVAILABLE:
+          alert("Location information is unavailable.");
+          break;
+        case error.TIMEOUT:
+          alert("The request to get user location timed out.");
+          break;
+        case error.UNKNOWN_ERROR:
+          alert("An unknown error occurred.");
+          break;
+      }
+    }
+  </script>
+</body>
+</html
